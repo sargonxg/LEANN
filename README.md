@@ -1,3 +1,11 @@
+<!-- tacitus-fork-status -->
+> **Retained upstream research fork.** The original project is [StarTrail-org/LEANN](https://github.com/StarTrail-org/LEANN).
+> This fork is preserved for inspection and evaluation. Benchmark or performance
+> claims in the upstream README below are upstream results, not new measurements
+> of this fork. No model evaluation or hosted acceptance was run in this review.
+> Original authorship and license terms remain in place.
+<!-- /tacitus-fork-status -->
+
 <p align="center">
   <img src="assets/logo-text.png" alt="LEANN Logo" width="400">
 </p>
