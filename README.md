@@ -54,15 +54,11 @@
 
 LEANN is an innovative vector database that democratizes personal AI. Transform your laptop into a powerful RAG system that can index and search through millions of documents while using **97% less storage** than traditional solutions **without accuracy loss**.
 
-
 LEANN achieves this through *graph-based selective recomputation* with *high-degree preserving pruning*, computing embeddings on-demand instead of storing them all. [Illustration Fig →](#️-architecture--how-it-works) | [Paper →](https://arxiv.org/abs/2506.08276)
 
 **Ready to RAG Everything?** Transform your laptop into a personal AI assistant that can semantic search your **[file system](#-personal-data-manager-process-any-documents-pdf-txt-md)**, **[emails](#-your-personal-email-secretary-rag-on-apple-mail)**, **[browser history](#-time-machine-for-the-web-rag-your-entire-browser-history)**, **[chat history](#-wechat-detective-unlock-your-golden-memories)** ([WeChat](#-wechat-detective-unlock-your-golden-memories), [iMessage](#-imessage-history-your-personal-conversation-archive)), **[agent memory](#-chatgpt-chat-history-your-personal-ai-conversation-archive)** ([ChatGPT](#-chatgpt-chat-history-your-personal-ai-conversation-archive), [Claude](#-claude-chat-history-your-personal-ai-conversation-archive)), **[live data](#mcp-integration-rag-on-live-data-from-any-platform)** ([Slack](#slack-messages-search-your-team-conversations), [Twitter](#-twitter-bookmarks-your-personal-tweet-library)), **[codebase](#-claude-code-integration-transform-your-development-workflow)**\*, or external knowledge bases (i.e., 60M documents) - all on your laptop, with zero cloud costs and complete privacy.
 
-
 \* Claude Code only supports basic `grep`-style keyword search. **LEANN** is a drop-in **semantic search MCP service fully compatible with Claude Code**, unlocking intelligent retrieval without changing your workflow. 🔥 Check out [the easy setup →](packages/leann-mcp/README.md)
-
-
 
 ## Why LEANN?
 
@@ -71,7 +67,6 @@ LEANN achieves this through *graph-based selective recomputation* with *high-deg
 </p>
 
 > **The numbers speak for themselves:** Index 60 million text chunks in just 6GB instead of 201GB. From emails to browser history, everything fits on your laptop. [See detailed benchmarks for different applications below ↓](#-storage-comparison)
-
 
 🔒 **Privacy:** Your data never leaves your laptop. No OpenAI, no cloud, no "terms of service".
 
@@ -124,6 +119,22 @@ source .venv/bin/activate
 uv pip install leann
 
 # CPU-only (Linux): use the `cpu` extra (e.g. `leann[cpu]`)
+
+<!-- tacitus-practical-entry -->
+## Purpose, code and a playable introduction
+
+Evaluate an upstream local retrieval backend against a fixed, rights-cleared policy corpus and record recall, latency, storage and build costs.
+
+**Upstream evaluation fork.** Upstream LEANN fork. Upstream speed/storage/benchmark claims have not been reproduced by this portfolio pass.
+
+[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+
+![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+
+Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
+<!-- /tacitus-practical-entry -->
+
+
 ```
 
 > **Linux note:** if a later `leann build` fails with `Security Violation [pathsec.open]: refusing multiply-linked file`, reinstall with `UV_LINK_MODE=copy uv pip install --reinstall ...` (or `UV_LINK_MODE=copy uv tool install --reinstall ...`) - uv's default hardlink installs trip nltk's hardened file loader bundled with llama-index. Details in the [FAQ](docs/faq.md).
@@ -135,8 +146,6 @@ uv pip install leann
 <summary>
 <strong>🔧 Build from Source (Recommended for development)</strong>
 </summary>
-
-
 
 ```bash
 git clone https://github.com/StarTrail-org/LEANN.git leann
@@ -226,7 +235,6 @@ uv sync --extra diskann
 
 </details>
 
-
 ## Quick Start
 
 Our declarative API makes RAG as easy as writing a config file.
@@ -257,14 +265,11 @@ response = chat.ask("How much storage does LEANN save?", top_k=1)
 
 LEANN supports RAG on various data sources including documents (`.pdf`, `.txt`, `.md`), Apple Mail, Google Search History, WeChat, ChatGPT conversations, Claude conversations, iMessage conversations, and **live data from any platform through MCP (Model Context Protocol) servers** - including Slack, Twitter, and more.
 
-
-
 ### Generation Model Setup
 
 #### LLM Backend
 
 LEANN supports many LLM providers for text generation (HuggingFace, Ollama, Anthropic, and Any OpenAI compatible API).
-
 
 <details>
 <summary><strong>🔑 OpenAI API Setup (Default)</strong></summary>
@@ -298,9 +303,7 @@ If you are using it for embedding, set the `--embedding-mode openai` flag and sp
 
 -----
 
-
 Below is a list of base URLs for common providers to get you started.
-
 
 ### 🖥️ Local Inference Engines (Recommended for full privacy)
 
@@ -318,7 +321,6 @@ Below is a list of base URLs for common providers to get you started.
 ### ☁️ Cloud Providers
 
 > **🚨 A Note on Privacy:** Before choosing a cloud provider, carefully review their privacy and data retention policies. Depending on their terms, your data may be used for their own purposes, including but not limited to human reviews and model training, which can lead to serious consequences if not handled properly.
-
 
 | Provider         | Base URL                                                   |
 | ---------------- | ---------------------------------------------------------- |
@@ -375,7 +377,6 @@ ollama pull llama3.2:1b
 ```
 
 </details>
-
 
 ## ⭐ Flexible Configuration
 
@@ -519,7 +520,6 @@ For detailed usage, see the [ColQwen Guide](docs/COLQWEN_GUIDE.md).
 
 > **Note:** The examples below currently support macOS only. Windows support coming soon.
 
-
 <p align="center">
   <img src="videos/mail_clear.gif" alt="LEANN Email Search Demo" width="600">
 </p>
@@ -628,7 +628,6 @@ Once the index is built, you can ask questions like:
 python -m apps.wechat_rag --query "Show me all group chats about weekend plans"
 ```
 **400K messages → 64MB storage** Search years of chat history in any language.
-
 
 <details>
 <summary><strong>🔧 Click to expand: Installation Requirements</strong></summary>
@@ -1111,14 +1110,11 @@ leann --help
 # Install the LEANN CLI globally using uv tool
 uv tool install leann-core --with leann
 
-
 # Now you can use leann from anywhere without activating venv
 leann --help
 ```
 
 > **Note**: Global installation is required for Claude Code integration. The `leann_mcp` server depends on the globally available `leann` command.
-
-
 
 ### Usage Examples
 
@@ -1312,8 +1308,6 @@ results = searcher.search("banana‑crocodile", use_grep=True, top_k=1)
 | LEANN  | 324 MB      | 6 GB       | 64 MB       | 79 MB       | 6.4 MB        |
 | Savings| 91%         | 97%        | 97%         | 97%         | 95%           |
 
-
-
 ## Reproduce Our Results
 
 ```bash
@@ -1344,9 +1338,7 @@ If you find Leann useful, please cite:
 
 ## 🤝 [CONTRIBUTING →](docs/CONTRIBUTING.md)
 
-
 ## ❓ [FAQ →](docs/faq.md)
-
 
 ## 📈 [Roadmap →](docs/roadmap.md)
 
@@ -1359,7 +1351,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 Core Contributors: [Yichuan Wang](https://yichuan-w.github.io/) & [Zhifei Li](https://github.com/andylizf).
 
 Active Contributors: [Gabriel Dehan](https://github.com/gabriel-dehan), [Aakash Suresh](https://github.com/ASuresh0524)
-
 
 We welcome more contributors! Feel free to open issues or submit PRs.
 
